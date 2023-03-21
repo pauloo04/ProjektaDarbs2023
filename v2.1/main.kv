@@ -33,18 +33,6 @@ WindowManager:
         lat: 56.96
         lon: 24.5
         zoom: 7
-    #MapView:
-    #    lat: 56.96
-    #    lon: 24.5
-    #    zoom: 7
-    #    MapMarkerPopup:
-    #        #source: "images/pin.png"
-    #        lat: 56
-    #        lon: 24
-    #        Button:
-    #            text: "Yo"
-    #            on_release:
-    #                print("Hey")
 
 <Veikals>:
     name: "veikals"
@@ -79,12 +67,37 @@ WindowManager:
         text: "Seit vares pieslegties"
 
 <Registreties>:
+    email: email
+    pwd: pwd
     name: "registreties"
 
     rows: 2
     Navbar:
-    Label:
-        text: "Seit vares registreties"
+    FloatLayout:
+        Label:
+            text : "E-pasts: "
+            size_hint : 0.2, 0.05
+            pos_hint : {"x":0.25, "top":0.7}
+        TextInput:
+            id : email
+            multiline :False
+            size_hint : 0.3, 0.05
+            pos_hint : {"x" : 0.45, "top" : 0.7}
+        Label:
+            text : "Parole: "
+            size_hint : 0.2, 0.05
+            pos_hint : {"x" : 0.25, "top" : 0.6}
+        TextInput:
+            id : pwd
+            multiline :False
+            size_hint : 0.3, 0.05
+            pos_hint : {"x" : 0.45, "top" : 0.6}
+        Button:
+            text : "Reģistrēties"
+            size_hint : 0.3, 0.07
+            pos_hint : {"x" : 0.4, "top" : 0.5}
+            on_release: 
+                root.signup()
 
 <Navbar@GridLayout>:
     size_hint: 1, 0.15
@@ -121,12 +134,10 @@ WindowManager:
         text: "Pieslēgties"
         on_release:
             app.root.current = "pieslegties"
-            app.login()
     RoundedButton:
         text: "Reģistrēties"
         on_release:
             app.root.current = "registreties"
-            app.register()
 
 <RoundedButton@Button>
     background_color: (0, 0, 0, 0)
