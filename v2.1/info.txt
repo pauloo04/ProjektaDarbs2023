@@ -1,0 +1,1 @@
+Nolēmām, ka, balstoties uz potenciālo lietotāju ieteikumiem, tomēr taisīsim mobilo aplikāciju izmantojot kivy python paplašinājumu.
