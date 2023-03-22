@@ -59,17 +59,10 @@ WindowManager:
         text: "Seit bus nedaudz uzrakstits par mums"
 
 <Pieslegties>:
-    name: "pieslegties"
-
-    rows: 2
-    Navbar:
-    Label:
-        text: "Seit vares pieslegties"
-
-<Registreties>:
     email: email
     pwd: pwd
-    name: "registreties"
+    noti: noti
+    name: "pieslegties"
 
     rows: 2
     Navbar:
@@ -77,12 +70,12 @@ WindowManager:
         Label:
             text : "E-pasts: "
             size_hint : 0.2, 0.05
-            pos_hint : {"x":0.25, "top":0.7}
+            pos_hint : {"x":0.25, "top":0.67}
         TextInput:
             id : email
             multiline :False
             size_hint : 0.3, 0.05
-            pos_hint : {"x" : 0.45, "top" : 0.7}
+            pos_hint : {"x" : 0.45, "top" : 0.67}
         Label:
             text : "Parole: "
             size_hint : 0.2, 0.05
@@ -93,11 +86,75 @@ WindowManager:
             size_hint : 0.3, 0.05
             pos_hint : {"x" : 0.45, "top" : 0.6}
         Button:
-            text : "Reģistrēties"
+            text : "Pieslēgties"
             size_hint : 0.3, 0.07
             pos_hint : {"x" : 0.4, "top" : 0.5}
             on_release: 
+                root.login()
+        Label:
+            id: noti
+            text: ""
+            size_hint : 0.3, 0.07
+            pos_hint : {"x" : 0.4, "top" : 0.4}
+
+<Registreties>:
+    user: user
+    email: email
+    pwd: pwd
+    pwdc: pwdc
+    noti: noti
+    name: "registreties"
+
+    rows: 2
+    Navbar:
+    FloatLayout:
+        Label:
+            text : "Lietotājvārds: "
+            size_hint : 0.2, 0.05
+            pos_hint : {"x":0.25, "top":0.75}
+        TextInput:
+            id : user
+            multiline :False
+            size_hint : 0.3, 0.05
+            pos_hint : {"x" : 0.45, "top" : 0.75}
+        Label:
+            text : "E-pasts: "
+            size_hint : 0.2, 0.05
+            pos_hint : {"x":0.25, "top":0.68}
+        TextInput:
+            id : email
+            multiline :False
+            size_hint : 0.3, 0.05
+            pos_hint : {"x" : 0.45, "top" : 0.68}
+        Label:
+            text : "Parole: "
+            size_hint : 0.2, 0.05
+            pos_hint : {"x" : 0.25, "top" : 0.61}
+        TextInput:
+            id : pwd
+            multiline :False
+            size_hint : 0.3, 0.05
+            pos_hint : {"x" : 0.45, "top" : 0.61}
+        Label:
+            text : "Apstipriniet paroli: "
+            size_hint : 0.2, 0.05
+            pos_hint : {"x" : 0.25, "top" : 0.54}
+        TextInput:
+            id : pwdc
+            multiline :False
+            size_hint : 0.3, 0.05
+            pos_hint : {"x" : 0.45, "top" : 0.54}
+        Button:
+            text : "Reģistrēties"
+            size_hint : 0.3, 0.07
+            pos_hint : {"x" : 0.4, "top" : 0.44}
+            on_release: 
                 root.signup()
+        Label:
+            id: noti
+            text: ""
+            size_hint : 0.3, 0.07
+            pos_hint : {"x" : 0.4, "top" : 0.34}
 
 <Navbar@GridLayout>:
     size_hint: 1, 0.15

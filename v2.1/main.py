@@ -37,27 +37,53 @@ class ParMums(GridLayout, Screen):
     pass
 
 class Pieslegties(GridLayout, Screen):
-    pass
-
-class Registreties(GridLayout, Screen):
     email = ObjectProperty(None)
     pwd = ObjectProperty(None)
 
-    def signup(self):
-        with db.connect("sakoplatviju.db") as con:
-            ievaditais = self.email.text
-            registretie = con.execute("SELECT epasts FROM Lietotaji").fetchall()
-            pastav = False
-            for epasts in registretie:
-                if epasts[0].strip(",") == ievaditais:
-                    pastav = True
-                    break
-            if not pastav:
-                con.execute("""INSERT INTO Lietotaji(vards, epasts, parole_hash) values (?, ?, ?)""", ("Pagaidam nav", self.email.text, self.pwd.text))
-                print(f"Veiksmigi piereģistrēts ({self.email.text}, {self.pwd.text})!")
-            else:
-                print("E-pasts jau reģistrēts!")
+    def login(self):
+        if self.email.text and self.pwd.text:
+            with db.connect("sakoplatviju.db") as con:
+                iev_email = self.email.text
+                iev_pwd = self.pwd.text
+                atrasta = con.execute("""SELECT parole_hash FROM Lietotaji WHERE epasts=?""", (iev_email,)).fetchall()
+                if atrasta:
+                    if atrasta[0][0].strip(",") == iev_pwd:
+                        #ieiet apliakcija
+                        self.noti.text = "Veiksmīga pieslēgšanās!"
+                    else:
+                        self.noti.text = "Nepareiza parole!"
+                else:
+                    self.noti.text = "Profils nepastāv!"
+        else:
+            self.noti.text = "Lūdzu aizpildiet visus laukus!"
 
+class Registreties(GridLayout, Screen):
+    user = ObjectProperty(None)
+    email = ObjectProperty(None)
+    pwd = ObjectProperty(None)
+    pwdc = ObjectProperty(None)
+    noti = ObjectProperty(None)
+
+    def signup(self):
+        if self.user.text and self.email.text and self.pwd.text and self.pwdc.text:
+            with db.connect("sakoplatviju.db") as con:
+                ievaditais = self.email.text
+                registretie = con.execute("SELECT epasts FROM Lietotaji").fetchall()
+                pastav = False
+                for epasts in registretie:
+                    if epasts[0].strip(",") == ievaditais:
+                        pastav = True
+                        break
+                    if not pastav:
+                        if self.pwd.text == self.pwdc.text:
+                            con.execute("""INSERT INTO Lietotaji(vards, epasts, parole_hash) values (?, ?, ?)""", (self.email.text, self.email.text, self.pwd.text))
+                            self.noti.text = f"Veiksmigi piereģistrēts ({self.email.text}, {self.pwd.text})!"
+                        else:
+                            self.noti.text = "Paroles nesakrīt!"
+                    else:
+                        self.noti.text = "E-pasts jau reģistrēts!"
+        else:
+            self.noti.text = "Lūdzu aizpildiet visus laukus!"
 
 class WindowManager(ScreenManager):
     pass
