@@ -13,15 +13,15 @@ WindowManager:
 
 <Home>:
     name: "home"
-    canvas.before:
-        Rectangle:
-            pos: self.pos
-            size: self.size
-            source: 'images/home-hero.jpg'
 
     rows: 2
     Navbar:
     Label:
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/home-hero.jpg'
         text: "Home screen"
 
 <Notikumi>:
