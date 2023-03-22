@@ -1,21 +1,10 @@
 #: import NoTransition kivy.uix.screenmanager.NoTransition
 #: import MapView kivy_garden.mapview.MapView
 
-WindowManager:
-    transition: NoTransition()
-    Home:
-    Notikumi:
-    Veikals:
-    FAQ:
-    ParMums:
-    Pieslegties:
-    Registreties:
-
-<Home>:
-    name: "home"
-
+<LOHome>:
+    name: "lohome"
     rows: 2
-    Navbar:
+    LONavbar:
     Label:
         canvas.before:
             Rectangle:
@@ -24,37 +13,33 @@ WindowManager:
                 source: 'images/home-hero.jpg'
         text: "Home screen"
 
-<Notikumi>:
-    name: "notikumi"
-
+<LONotikumi>:
+    name: "lonotikumi"
     rows: 2
-    Navbar:
+    LONavbar:
     Map:
         lat: 56.96
         lon: 24.5
         zoom: 7
 
-<Veikals>:
-    name: "veikals"
-
+<LOVeikals>:
+    name: "loveikals"
     rows: 2
-    Navbar:
+    LONavbar:
     Label:
         text: "Seit vares pirkt"
 
-<FAQ>:
-    name: "faq"
-
+<LOFAQ>:
+    name: "lofaq"
     rows: 2
-    Navbar:
+    LONavbar:
     Label:
         text: "Seit bus atbildes uz biezak uzdotajiem jautajumiem"
 
-<ParMums>:
-    name: "parmums"
-
+<LOParMums>:
+    name: "loparmums"
     rows: 2
-    Navbar:
+    LONavbar:
     Label:
         text: "Seit bus nedaudz uzrakstits par mums"
 
@@ -65,7 +50,7 @@ WindowManager:
     name: "pieslegties"
 
     rows: 2
-    Navbar:
+    LONavbar:
     FloatLayout:
         Label:
             text : "E-pasts: "
@@ -85,6 +70,7 @@ WindowManager:
             multiline :False
             size_hint : 0.3, 0.05
             pos_hint : {"x" : 0.45, "top" : 0.6}
+            password : True
         Button:
             text : "Pieslēgties"
             size_hint : 0.3, 0.07
@@ -106,7 +92,7 @@ WindowManager:
     name: "registreties"
 
     rows: 2
-    Navbar:
+    LONavbar:
     FloatLayout:
         Label:
             text : "Lietotājvārds: "
@@ -135,6 +121,7 @@ WindowManager:
             multiline :False
             size_hint : 0.3, 0.05
             pos_hint : {"x" : 0.45, "top" : 0.61}
+            password : True
         Label:
             text : "Apstipriniet paroli: "
             size_hint : 0.2, 0.05
@@ -144,6 +131,7 @@ WindowManager:
             multiline :False
             size_hint : 0.3, 0.05
             pos_hint : {"x" : 0.45, "top" : 0.54}
+            password : True
         Button:
             text : "Reģistrēties"
             size_hint : 0.3, 0.07
@@ -156,34 +144,34 @@ WindowManager:
             size_hint : 0.3, 0.07
             pos_hint : {"x" : 0.4, "top" : 0.34}
 
-<Navbar@GridLayout>:
+<LONavbar@GridLayout>:
     size_hint: 1, 0.15
     cols: 2
-    MainNavbar:
+    LOMainNavbar:
     LoginNavbar:
 
-<MainNavbar@GridLayout>:
+<LOMainNavbar@GridLayout>:
     cols: 5
     RoundedActiveButton:
         text: "Home"
         on_release:
-            app.root.current = "home"
+            app.root.current = "lohome"
     RoundedButton:
         text: "Notikumi"
         on_release:
-            app.root.current = "notikumi"
+            app.root.current = "lonotikumi"
     RoundedButton:
         text: "Veikals"
         on_release:
-            app.root.current = "veikals"
+            app.root.current = "loveikals"
     RoundedButton:
         text: "FAQ"
         on_release:
-            app.root.current = "faq"
+            app.root.current = "lofaq"
     RoundedButton:
         text: "Par Mums"
         on_release:
-            app.root.current = "parmums"
+            app.root.current = "loparmums"
 
 <LoginNavbar@GridLayout>:
     cols: 2
@@ -195,6 +183,113 @@ WindowManager:
         text: "Reģistrēties"
         on_release:
             app.root.current = "registreties"
+
+
+
+
+
+
+
+
+
+
+<LINavbar@GridLayout>:
+    size_hint: 1, 0.15
+    cols: 6
+    RoundedActiveButton:
+        text: "Home"
+        on_release:
+            app.root.current = "lihome"
+    RoundedButton:
+        text: "Notikumi"
+        on_release:
+            app.root.current = "linotikumi"
+    RoundedButton:
+        text: "Veikals"
+        on_release:
+            app.root.current = "liveikals"
+    RoundedButton:
+        text: "FAQ"
+        on_release:
+            app.root.current = "lifaq"
+    RoundedButton:
+        text: "Par Mums"
+        on_release:
+            app.root.current = "liparmums"
+    RoundedButton:
+        text: "Profils"
+        on_release:
+            app.root.current = "profils"
+
+<Profils>:
+    user : user
+    cash : cash
+    name: "profils"
+    rows: 2
+    LINavbar:
+    FloatLayout:
+        Label:
+            text : "Lietotājvārds: "
+            size_hint : 0.2, 0.05
+            pos_hint : {"x":0.25, "top":0.75}
+        Label:
+            id : user
+            text : ""
+            size_hint : 0.3, 0.05
+            pos_hint : {"x" : 0.45, "top" : 0.75}
+        Label:
+            id : cash
+            text : "0C"
+
+<LIHome>:
+    name: "lihome"
+    rows: 2
+    LINavbar:
+    Label:
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/home-hero.jpg'
+        text: "Home screen"
+
+<LINotikumi>:
+    name: "linotikumi"
+    rows: 2
+    LINavbar:
+    Map:
+        lat: 56.96
+        lon: 24.5
+        zoom: 7
+
+<LIVeikals>:
+    name: "liveikals"
+    rows: 2
+    LINavbar:
+    Label:
+        text: "Seit vares pirkt"
+
+<LIFAQ>:
+    name: "lifaq"
+    rows: 2
+    LINavbar:
+    Label:
+        text: "Seit bus atbildes uz biezak uzdotajiem jautajumiem"
+
+<LIParMums>:
+    name: "liparmums"
+    rows: 2
+    LINavbar:
+    Label:
+        text: "Seit bus nedaudz uzrakstits par mums"
+
+
+
+
+
+
+
+
 
 <RoundedButton@Button>
     background_color: (0, 0, 0, 0)
