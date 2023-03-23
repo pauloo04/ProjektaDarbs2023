@@ -1,2 +1,2 @@
 
-    def build(self):
+class LOFAQ(GridLayout, Screen):

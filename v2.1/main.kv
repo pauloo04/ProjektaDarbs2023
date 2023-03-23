@@ -222,24 +222,48 @@
             app.root.current = "profils"
 
 <Profils>:
-    user : user
-    cash : cash
+    userfield: userfield
+    emailfield: emailfield
     name: "profils"
     rows: 2
     LINavbar:
     FloatLayout:
         Label:
+            text : root.cash
+            size_hint: 0.1, 0.05
+            pos_hint: {"x": 0.85, "top":0.9}
+        Label:
             text : "Lietotājvārds: "
             size_hint : 0.2, 0.05
-            pos_hint : {"x":0.25, "top":0.75}
-        Label:
-            id : user
+            pos_hint : {"x":0.25, "top":0.7}
+        TextInput:
+            id: userfield
             text : ""
-            size_hint : 0.3, 0.05
-            pos_hint : {"x" : 0.45, "top" : 0.75}
+            size_hint : 0.2, 0.05
+            pos_hint : {"x" : 0.45, "top" : 0.7}
+            disabled: not root.changeuser
+        Button:
+            text: root.changeusertext
+            size_hint : 0.1, 0.05
+            pos_hint : {"x": 0.65, "top" : 0.7}
+            on_release:
+                root.change_user()
         Label:
-            id : cash
-            text : "0C"
+            text : "E-pasts: "
+            size_hint : 0.2, 0.05
+            pos_hint : {"x":0.25, "top":0.6}
+        TextInput:
+            id: emailfield
+            text : ""
+            size_hint : 0.2, 0.05
+            pos_hint : {"x" : 0.45, "top" : 0.6}
+            disabled: not root.changeemail
+        Button:
+            text: root.changeemailtext
+            size_hint : 0.1, 0.05
+            pos_hint : {"x": 0.65, "top" : 0.6}
+            on_release:
+                root.change_email()
 
 <LIHome>:
     name: "lihome"
@@ -263,12 +287,104 @@
         zoom: 7
 
 <LIVeikals>:
+    noti: noti
     name: "liveikals"
     rows: 2
     LINavbar:
-    Label:
-        text: "Seit vares pirkt"
-
+    FloatLayout:
+        Label:
+            text : root.cash
+            size_hint: 0.1, 0.05
+            pos_hint: {"x": 0.85, "top":0.95}
+        FloatLayout:
+            Label:
+                text: "Prece 1"
+                size_hint : 0.2, 0.05
+                pos_hint : {"x":0.1, "top":0.8}
+            Label:
+                text: "100C"
+                size_hint : 0.2, 0.05
+                pos_hint : {"x":0.1, "top":0.7}
+            Button:
+                text: "Pirkt"
+                size_hint : 0.2, 0.05
+                pos_hint : {"x":0.1, "top":0.6}
+                on_release : root.pirkt(1)
+        FloatLayout:
+            Label:
+                text: "Prece 2"
+                size_hint : 0.2, 0.05
+                pos_hint : {"x":0.4, "top":0.8}
+            Label:
+                text: "400C"
+                size_hint : 0.2, 0.05
+                pos_hint : {"x":0.4, "top":0.7}
+            Button:
+                text: "Pirkt"
+                size_hint : 0.2, 0.05
+                pos_hint : {"x":0.4, "top":0.6}
+                on_release : root.pirkt(2)
+        FloatLayout:
+            Label:
+                text: "Prece 3"
+                size_hint : 0.2, 0.05
+                pos_hint : {"x":0.7, "top":0.8}
+            Label:
+                text: "60C"
+                size_hint : 0.2, 0.05
+                pos_hint : {"x":0.7, "top":0.7}
+            Button:
+                text: "Pirkt"
+                size_hint : 0.2, 0.05
+                pos_hint : {"x":0.7, "top":0.6}
+                on_release : root.pirkt(3)
+        FloatLayout:
+            Label:
+                text: "Prece 4"
+                size_hint : 0.2, 0.05
+                pos_hint : {"x":0.1, "top":0.4}
+            Label:
+                text: "120C"
+                size_hint : 0.2, 0.05
+                pos_hint : {"x":0.1, "top":0.3}
+            Button:
+                text: "Pirkt"
+                size_hint : 0.2, 0.05
+                pos_hint : {"x":0.1, "top":0.2}
+                on_release : root.pirkt(4)
+        FloatLayout:
+            Label:
+                text: "Prece 5"
+                size_hint : 0.2, 0.05
+                pos_hint : {"x":0.4, "top":0.4}
+            Label:
+                text: "310C"
+                size_hint : 0.2, 0.05
+                pos_hint : {"x":0.4, "top":0.3}
+            Button:
+                text: "Pirkt"
+                size_hint : 0.2, 0.05
+                pos_hint : {"x":0.4, "top":0.2}
+                on_release : root.pirkt(5)
+        FloatLayout:
+            Label:
+                text: "Prece 6"
+                size_hint : 0.2, 0.05
+                pos_hint : {"x":0.7, "top":0.4}
+            Label:
+                text: "150C"
+                size_hint : 0.2, 0.05
+                pos_hint : {"x":0.7, "top":0.3}
+            Button:
+                text: "Pirkt"
+                size_hint : 0.2, 0.05
+                pos_hint : {"x":0.7, "top":0.2}
+                on_release : root.pirkt(6)
+        Label:
+            id: noti
+            text: ""
+            size_hint : 0.2, 0.05
+            pos_hint : {"x":0.4, "top":0.1}
 <LIFAQ>:
     name: "lifaq"
     rows: 2

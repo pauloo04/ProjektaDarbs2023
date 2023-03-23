@@ -6,7 +6,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, StringProperty, BooleanProperty
 from kivy.graphics import Rectangle, RoundedRectangle
 from kivy.uix.widget import Widget
 from kivy_garden.mapview import MapMarkerPopup, MapView
@@ -44,7 +44,28 @@ class LINotikumi(GridLayout, Screen):
     pass
 
 class LIVeikals(GridLayout, Screen):
-    pass
+
+    cash = StringProperty(" ")
+    noti = ObjectProperty(None)
+
+    def on_pre_enter(self, *args):
+        self.update_labels()
+
+    def update_labels(self):
+        self.cash = str(user_logon_cash) + "C"
+    
+    def pirkt(self, prece_id):
+        global user_logon_cash
+        with db.connect("sakoplatviju.db") as con:
+            prece = con.execute("Select nosaukums, cena from Preces where id=?", (prece_id,)).fetchall()
+            print(prece)
+            if user_logon_cash >= prece[0][1]:
+                self.noti.text = f"Veiksmīgi nopirkts {prece[0]} par {prece[1]}C!"
+                user_logon_cash -= prece[0][1]
+                con.execute("""Update Lietotaji set cash = ? where id = ?""", (user_logon_cash, user_logon_id))
+                self.update_labels()
+            else:
+                self.noti.text = "Nepietiek līdzekļu!"
 
 class LIFAQ(GridLayout, Screen):
     pass
@@ -60,19 +81,20 @@ class Pieslegties(GridLayout, Screen):
         global user_logon_email
         global user_logon_id
         global user_logon_user
+        global user_logon_cash
         if self.email.text and self.pwd.text:
             with db.connect("sakoplatviju.db") as con:
                 iev_email = self.email.text
                 iev_pwd = self.pwd.text
-                atrasta = con.execute("""SELECT id, parole_hash FROM Lietotaji WHERE epasts=?""", (iev_email,)).fetchall()
+                atrasta = con.execute("""SELECT id, lietotajvards, parole_hash, cash FROM Lietotaji WHERE epasts=?""", (iev_email,)).fetchall()
                 if atrasta:
-                    print(atrasta)
-                    if atrasta[0][1] == iev_pwd:
+                    if atrasta[0][2] == iev_pwd:
                         self.noti.text = "Veiksmīga pieslēgšanās!"
                         sm.current = "lihome"
                         user_logon_id = atrasta[0][0]
                         user_logon_user = atrasta[0][1]
                         user_logon_email = iev_email
+                        user_logon_cash = atrasta[0][3]
                     else:
                         self.noti.text = "Nepareiza parole!"
                 else:
@@ -90,34 +112,69 @@ class Registreties(GridLayout, Screen):
     def signup(self):
         if self.user.text and self.email.text and self.pwd.text and self.pwdc.text:
             with db.connect("sakoplatviju.db") as con:
-                ievaditais = self.email.text
-                registretie = con.execute("SELECT epasts FROM Lietotaji").fetchall()
-                pastav = False
-                for epasts in registretie:
-                    if epasts[0].strip(",") == ievaditais:
-                        pastav = True
+                ievaditais_user = self.user.text
+                ievaditais_email = self.email.text
+                registretie = con.execute("SELECT lietotajvards, epasts FROM Lietotaji").fetchall()
+                pastav_email = False
+                for lietotajvards, epasts in registretie:
+                    if epasts == ievaditais_email:
+                        pastav_email = True
                         break
-                    if not pastav:
+                if not pastav_email:
+                    pastav_user = False
+                    for lietotajvards, epasts in registretie:
+                        if lietotajvards == ievaditais_user:
+                            pastav_user = True
+                            break
+                    if not pastav_user:
                         if self.pwd.text == self.pwdc.text:
-                            con.execute("""INSERT INTO Lietotaji(vards, epasts, parole_hash) values (?, ?, ?)""", (self.email.text, self.email.text, self.pwd.text))
-                            self.noti.text = f"Veiksmigi piereģistrēts ({self.email.text}, {self.pwd.text})!"
+                            con.execute("""INSERT INTO Lietotaji(lietotajvards, epasts, parole_hash, cash) values (?, ?, ?, ?)""", (self.user.text, self.email.text, self.pwd.text, 0))
+                            self.noti.text = f"Veiksmigi piereģistrēts {self.user.text}!"
                         else:
                             self.noti.text = "Paroles nesakrīt!"
                     else:
-                        self.noti.text = "E-pasts jau reģistrēts!"
+                        self.noti.text = "Lietotājvārds aizņemts!"
+                else:
+                    self.noti.text = "E-pasts jau reģistrēts!"
         else:
             self.noti.text = "Lūdzu aizpildiet visus laukus!"
 
 class Profils(GridLayout, Screen):
-    user = ObjectProperty(None)
-    cash = ObjectProperty(None)
+    cash = StringProperty(" ")
+    changeuser = BooleanProperty(False)
+    changeemail = BooleanProperty(False)
+    changeusertext = StringProperty("Mainīt")
+    changeemailtext = StringProperty("Mainīt")
+    userfield = ObjectProperty(None)
+    emailfield = ObjectProperty(None)
 
-    def update_label(self):
-        try:
-            self.user.text = user_logon_user
-            print(user_logon_user)
-        except:
-            pass
+    def on_pre_enter(self, *args):
+        self.update_labels()
+
+    def update_labels(self):
+        self.userfield.text = user_logon_user
+        self.cash = str(user_logon_cash) + "C"
+        self.emailfield.text = user_logon_email
+    
+    def change_user(self):
+        global user_logon_user
+        if self.changeusertext == "Saglabāt":
+            with db.connect("sakoplatviju.db") as con:
+                con.execute("""Update Lietotaji set lietotajvards = ? where id = ?""", (self.userfield.text, user_logon_id))
+                user_logon_user = self.userfield.text
+                con.commit()
+        self.changeuser = not self.changeuser
+        self.changeusertext = "Mainīt" if self.changeusertext == "Saglabāt" else "Saglabāt"
+    
+    def change_email(self):
+        global user_logon_email
+        if self.changeemailtext == "Saglabāt":
+            with db.connect("sakoplatviju.db") as con:
+                con.execute("""Update Lietotaji set epasts = ? where id = ?""", (self.emailfield.text, user_logon_id))
+                user_logon_email = self.emailfield.text
+                con.commit()
+        self.changeemail = not self.changeemail
+        self.changeemailtext = "Mainīt" if self.changeemailtext == "Saglabāt" else "Saglabāt"
 
 class WindowManager(ScreenManager):
     pass
