@@ -4,7 +4,7 @@
 <LOHome>:
     name: "lohome"
     rows: 2
-    LONavbar:
+    LOHomeNavbar:
     Label:
         canvas.before:
             Rectangle:
@@ -16,7 +16,7 @@
 <LONotikumi>:
     name: "lonotikumi"
     rows: 2
-    LONavbar:
+    LONotikumiNavbar:
     Map:
         lat: 56.96
         lon: 24.5
@@ -25,21 +25,21 @@
 <LOVeikals>:
     name: "loveikals"
     rows: 2
-    LONavbar:
+    LOVeikalsNavbar:
     Label:
         text: "Seit vares pirkt"
 
 <LOFAQ>:
     name: "lofaq"
     rows: 2
-    LONavbar:
+    LOFAQNavbar:
     Label:
         text: "Seit bus atbildes uz biezak uzdotajiem jautajumiem"
 
 <LOParMums>:
     name: "loparmums"
     rows: 2
-    LONavbar:
+    LOParMumsNavbar:
     Label:
         text: "Seit bus nedaudz uzrakstits par mums"
 
@@ -50,7 +50,7 @@
     name: "pieslegties"
 
     rows: 2
-    LONavbar:
+    LOPieslegtiesNavbar:
     FloatLayout:
         Label:
             text : "E-pasts: "
@@ -92,7 +92,7 @@
     name: "registreties"
 
     rows: 2
-    LONavbar:
+    LORegistretiesNavbar:
     FloatLayout:
         Label:
             text : "Lietotājvārds: "
@@ -144,14 +144,9 @@
             size_hint : 0.3, 0.07
             pos_hint : {"x" : 0.4, "top" : 0.34}
 
-<LONavbar@GridLayout>:
+<LOHomeNavbar@GridLayout>:
     size_hint: 1, 0.15
-    cols: 2
-    LOMainNavbar:
-    LoginNavbar:
-
-<LOMainNavbar@GridLayout>:
-    cols: 5
+    cols: 7
     RoundedActiveButton:
         text: "Home"
         on_release:
@@ -172,9 +167,6 @@
         text: "Par Mums"
         on_release:
             app.root.current = "loparmums"
-
-<LoginNavbar@GridLayout>:
-    cols: 2
     RoundedButton:
         text: "Pieslēgties"
         on_release:
@@ -184,16 +176,199 @@
         on_release:
             app.root.current = "registreties"
 
+<LONotikumiNavbar@GridLayout>:
+    size_hint: 1, 0.15
+    cols: 7
+    RoundedButton:
+        text: "Home"
+        on_release:
+            app.root.current = "lohome"
+    RoundedActiveButton:
+        text: "Notikumi"
+        on_release:
+            app.root.current = "lonotikumi"
+    RoundedButton:
+        text: "Veikals"
+        on_release:
+            app.root.current = "loveikals"
+    RoundedButton:
+        text: "FAQ"
+        on_release:
+            app.root.current = "lofaq"
+    RoundedButton:
+        text: "Par Mums"
+        on_release:
+            app.root.current = "loparmums"
+    RoundedButton:
+        text: "Pieslēgties"
+        on_release:
+            app.root.current = "pieslegties"
+    RoundedButton:
+        text: "Reģistrēties"
+        on_release:
+            app.root.current = "registreties"
 
+<LOVeikalsNavbar@GridLayout>:
+    size_hint: 1, 0.15
+    cols: 7
+    RoundedButton:
+        text: "Home"
+        on_release:
+            app.root.current = "lohome"
+    RoundedButton:
+        text: "Notikumi"
+        on_release:
+            app.root.current = "lonotikumi"
+    RoundedActiveButton:
+        text: "Veikals"
+        on_release:
+            app.root.current = "loveikals"
+    RoundedButton:
+        text: "FAQ"
+        on_release:
+            app.root.current = "lofaq"
+    RoundedButton:
+        text: "Par Mums"
+        on_release:
+            app.root.current = "loparmums"
+    RoundedButton:
+        text: "Pieslēgties"
+        on_release:
+            app.root.current = "pieslegties"
+    RoundedButton:
+        text: "Reģistrēties"
+        on_release:
+            app.root.current = "registreties"
 
+<LOFAQNavbar@GridLayout>:
+    size_hint: 1, 0.15
+    cols: 7
+    RoundedButton:
+        text: "Home"
+        on_release:
+            app.root.current = "lohome"
+    RoundedButton:
+        text: "Notikumi"
+        on_release:
+            app.root.current = "lonotikumi"
+    RoundedButton:
+        text: "Veikals"
+        on_release:
+            app.root.current = "loveikals"
+    RoundedActiveButton:
+        text: "FAQ"
+        on_release:
+            app.root.current = "lofaq"
+    RoundedButton:
+        text: "Par Mums"
+        on_release:
+            app.root.current = "loparmums"
+    RoundedButton:
+        text: "Pieslēgties"
+        on_release:
+            app.root.current = "pieslegties"
+    RoundedButton:
+        text: "Reģistrēties"
+        on_release:
+            app.root.current = "registreties"
 
+<LOParMumsNavbar@GridLayout>:
+    size_hint: 1, 0.15
+    cols: 7
+    RoundedButton:
+        text: "Home"
+        on_release:
+            app.root.current = "lohome"
+    RoundedButton:
+        text: "Notikumi"
+        on_release:
+            app.root.current = "lonotikumi"
+    RoundedButton:
+        text: "Veikals"
+        on_release:
+            app.root.current = "loveikals"
+    RoundedButton:
+        text: "FAQ"
+        on_release:
+            app.root.current = "lofaq"
+    RoundedActiveButton:
+        text: "Par Mums"
+        on_release:
+            app.root.current = "loparmums"
+    RoundedButton:
+        text: "Pieslēgties"
+        on_release:
+            app.root.current = "pieslegties"
+    RoundedButton:
+        text: "Reģistrēties"
+        on_release:
+            app.root.current = "registreties"
 
+<LOPieslegtiesNavbar@GridLayout>:
+    size_hint: 1, 0.15
+    cols: 7
+    RoundedButton:
+        text: "Home"
+        on_release:
+            app.root.current = "lohome"
+    RoundedButton:
+        text: "Notikumi"
+        on_release:
+            app.root.current = "lonotikumi"
+    RoundedButton:
+        text: "Veikals"
+        on_release:
+            app.root.current = "loveikals"
+    RoundedButton:
+        text: "FAQ"
+        on_release:
+            app.root.current = "lofaq"
+    RoundedButton:
+        text: "Par Mums"
+        on_release:
+            app.root.current = "loparmums"
+    RoundedActiveButton:
+        text: "Pieslēgties"
+        on_release:
+            app.root.current = "pieslegties"
+    RoundedButton:
+        text: "Reģistrēties"
+        on_release:
+            app.root.current = "registreties"
+            
+<LORegistretiesNavbar@GridLayout>:
+    size_hint: 1, 0.15
+    cols: 7
+    RoundedButton:
+        text: "Home"
+        on_release:
+            app.root.current = "lohome"
+    RoundedButton:
+        text: "Notikumi"
+        on_release:
+            app.root.current = "lonotikumi"
+    RoundedButton:
+        text: "Veikals"
+        on_release:
+            app.root.current = "loveikals"
+    RoundedButton:
+        text: "FAQ"
+        on_release:
+            app.root.current = "lofaq"
+    RoundedButton:
+        text: "Par Mums"
+        on_release:
+            app.root.current = "loparmums"
+    RoundedButton:
+        text: "Pieslēgties"
+        on_release:
+            app.root.current = "pieslegties"
+    RoundedActiveButton:
+        text: "Reģistrēties"
+        on_release:
+            app.root.current = "registreties"
 
-
-
-
-
-<LINavbar@GridLayout>:
+<LIHomeNavbar@GridLayout>:
     size_hint: 1, 0.15
     cols: 6
     RoundedActiveButton:
@@ -221,54 +396,150 @@
         on_release:
             app.root.current = "profils"
 
-<Profils>:
-    userfield: userfield
-    emailfield: emailfield
-    name: "profils"
-    rows: 2
-    LINavbar:
-    FloatLayout:
-        Label:
-            text : root.cash
-            size_hint: 0.1, 0.05
-            pos_hint: {"x": 0.85, "top":0.9}
-        Label:
-            text : "Lietotājvārds: "
-            size_hint : 0.2, 0.05
-            pos_hint : {"x":0.25, "top":0.7}
-        TextInput:
-            id: userfield
-            text : ""
-            size_hint : 0.2, 0.05
-            pos_hint : {"x" : 0.45, "top" : 0.7}
-            disabled: not root.changeuser
-        Button:
-            text: root.changeusertext
-            size_hint : 0.1, 0.05
-            pos_hint : {"x": 0.65, "top" : 0.7}
-            on_release:
-                root.change_user()
-        Label:
-            text : "E-pasts: "
-            size_hint : 0.2, 0.05
-            pos_hint : {"x":0.25, "top":0.6}
-        TextInput:
-            id: emailfield
-            text : ""
-            size_hint : 0.2, 0.05
-            pos_hint : {"x" : 0.45, "top" : 0.6}
-            disabled: not root.changeemail
-        Button:
-            text: root.changeemailtext
-            size_hint : 0.1, 0.05
-            pos_hint : {"x": 0.65, "top" : 0.6}
-            on_release:
-                root.change_email()
+<LINotikumiNavbar@GridLayout>:
+    size_hint: 1, 0.15
+    cols: 6
+    RoundedButton:
+        text: "Home"
+        on_release:
+            app.root.current = "lihome"
+    RoundedActiveButton:
+        text: "Notikumi"
+        on_release:
+            app.root.current = "linotikumi"
+    RoundedButton:
+        text: "Veikals"
+        on_release:
+            app.root.current = "liveikals"
+    RoundedButton:
+        text: "FAQ"
+        on_release:
+            app.root.current = "lifaq"
+    RoundedButton:
+        text: "Par Mums"
+        on_release:
+            app.root.current = "liparmums"
+    RoundedButton:
+        text: "Profils"
+        on_release:
+            app.root.current = "profils"
+
+<LIVeikalsNavbar@GridLayout>:
+    size_hint: 1, 0.15
+    cols: 6
+    RoundedButton:
+        text: "Home"
+        on_release:
+            app.root.current = "lihome"
+    RoundedButton:
+        text: "Notikumi"
+        on_release:
+            app.root.current = "linotikumi"
+    RoundedActiveButton:
+        text: "Veikals"
+        on_release:
+            app.root.current = "liveikals"
+    RoundedButton:
+        text: "FAQ"
+        on_release:
+            app.root.current = "lifaq"
+    RoundedButton:
+        text: "Par Mums"
+        on_release:
+            app.root.current = "liparmums"
+    RoundedButton:
+        text: "Profils"
+        on_release:
+            app.root.current = "profils"
+
+<LIFAQNavbar@GridLayout>:
+    size_hint: 1, 0.15
+    cols: 6
+    RoundedButton:
+        text: "Home"
+        on_release:
+            app.root.current = "lihome"
+    RoundedButton:
+        text: "Notikumi"
+        on_release:
+            app.root.current = "linotikumi"
+    RoundedButton:
+        text: "Veikals"
+        on_release:
+            app.root.current = "liveikals"
+    RoundedActiveButton:
+        text: "FAQ"
+        on_release:
+            app.root.current = "lifaq"
+    RoundedButton:
+        text: "Par Mums"
+        on_release:
+            app.root.current = "liparmums"
+    RoundedButton:
+        text: "Profils"
+        on_release:
+            app.root.current = "profils"
+
+<LIParMumsNavbar@GridLayout>:
+    size_hint: 1, 0.15
+    cols: 6
+    RoundedButton:
+        text: "Home"
+        on_release:
+            app.root.current = "lihome"
+    RoundedButton:
+        text: "Notikumi"
+        on_release:
+            app.root.current = "linotikumi"
+    RoundedButton:
+        text: "Veikals"
+        on_release:
+            app.root.current = "liveikals"
+    RoundedButton:
+        text: "FAQ"
+        on_release:
+            app.root.current = "lifaq"
+    RoundedActiveButton:
+        text: "Par Mums"
+        on_release:
+            app.root.current = "liparmums"
+    RoundedButton:
+        text: "Profils"
+        on_release:
+            app.root.current = "profils"
+
+<LIProfilsNavbar@GridLayout>:
+    size_hint: 1, 0.15
+    cols: 6
+    RoundedButton:
+        text: "Home"
+        on_release:
+            app.root.current = "lihome"
+    RoundedButton:
+        text: "Notikumi"
+        on_release:
+            app.root.current = "linotikumi"
+    RoundedButton:
+        text: "Veikals"
+        on_release:
+            app.root.current = "liveikals"
+    RoundedButton:
+        text: "FAQ"
+        on_release:
+            app.root.current = "lifaq"
+    RoundedButton:
+        text: "Par Mums"
+        on_release:
+            app.root.current = "liparmums"
+    RoundedActiveButton:
+        text: "Profils"
+        on_release:
+            app.root.current = "profils"
 
 <LIHome>:
     name: "lihome"
     rows: 2
-    LINavbar:
+    LIHomeNavbar:
     Label:
         canvas.before:
             Rectangle:
@@ -280,7 +551,7 @@
 <LINotikumi>:
     name: "linotikumi"
     rows: 2
-    LINavbar:
+    LINotikumiNavbar:
     Map:
         lat: 56.96
         lon: 24.5
@@ -290,7 +561,7 @@
     noti: noti
     name: "liveikals"
     rows: 2
-    LINavbar:
+    LIVeikalsNavbar:
     FloatLayout:
         Label:
             text : root.cash
@@ -388,21 +659,68 @@
 <LIFAQ>:
     name: "lifaq"
     rows: 2
-    LINavbar:
+    LIFAQNavbar:
     Label:
         text: "Seit bus atbildes uz biezak uzdotajiem jautajumiem"
 
 <LIParMums>:
     name: "liparmums"
     rows: 2
-    LINavbar:
+    LIParMumsNavbar:
     Label:
         text: "Seit bus nedaudz uzrakstits par mums"
 
-
-
-
-
+<Profils>:
+    userfield: userfield
+    emailfield: emailfield
+    name: "profils"
+    rows: 2
+    LIProfilsNavbar:
+    FloatLayout:
+        Label:
+            text : root.cash
+            size_hint: 0.1, 0.05
+            pos_hint: {"x": 0.85, "top":0.9}
+        Label:
+            text : "Lietotājvārds: "
+            size_hint : 0.2, 0.05
+            pos_hint : {"x":0.25, "top":0.7}
+        TextInput:
+            id: userfield
+            text : ""
+            size_hint : 0.2, 0.05
+            pos_hint : {"x" : 0.45, "top" : 0.7}
+            disabled: not root.changeuser
+        Button:
+            text: root.changeusertext
+            size_hint : 0.1, 0.05
+            pos_hint : {"x": 0.65, "top" : 0.7}
+            on_release:
+                root.change_user()
+        Label:
+            text : "E-pasts: "
+            size_hint : 0.2, 0.05
+            pos_hint : {"x":0.25, "top":0.6}
+        TextInput:
+            id: emailfield
+            text : ""
+            size_hint : 0.2, 0.05
+            pos_hint : {"x" : 0.45, "top" : 0.6}
+            disabled: not root.changeemail
+        Button:
+            text: root.changeemailtext
+            size_hint : 0.1, 0.05
+            pos_hint : {"x": 0.65, "top" : 0.6}
+            on_release:
+                root.change_email()
+        Button:
+            text: "Apskatīt reģistrētos notikumus"
+            size_hint: 0.5, 0.07
+            pos_hint : {"x": 0.25, "top" : 0.5}
+        Button:
+            text: "Apskatīt nopriktās preces"
+            size_hint: 0.5, 0.07
+            pos_hint : {"x": 0.25, "top" : 0.4}
 
 
 

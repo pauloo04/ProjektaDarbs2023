@@ -58,9 +58,8 @@ class LIVeikals(GridLayout, Screen):
         global user_logon_cash
         with db.connect("sakoplatviju.db") as con:
             prece = con.execute("Select nosaukums, cena from Preces where id=?", (prece_id,)).fetchall()
-            print(prece)
             if user_logon_cash >= prece[0][1]:
-                self.noti.text = f"Veiksmīgi nopirkts {prece[0]} par {prece[1]}C!"
+                self.noti.text = f"Veiksmīgi nopirkts {prece[0][0]} par {prece[0][1]}C!"
                 user_logon_cash -= prece[0][1]
                 con.execute("""Update Lietotaji set cash = ? where id = ?""", (user_logon_cash, user_logon_id))
                 self.update_labels()
